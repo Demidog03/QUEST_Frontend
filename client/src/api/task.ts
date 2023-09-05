@@ -1,6 +1,6 @@
 import {AxiosResponse} from 'axios'
 import {apiWithAuthAndErrorMessaging} from './api.ts'
-import {GetTasksResponse} from '../store/types/task.ts'
+import {AddTaskPayload, GetTasksResponse} from '../store/types/task.ts'
 import {ITask} from '../models/ITask.ts'
 
 export const getTasks = async (): Promise<AxiosResponse<GetTasksResponse>> => {
@@ -13,6 +13,13 @@ export const updateTaskColumn = async ({columnId, taskId}: {columnId: number, ta
   return await apiWithAuthAndErrorMessaging.patch(
       `/tasks/task/${taskId}/`,{
         column: columnId
+      }
+  )
+}
+export const addTask = async (data: AddTaskPayload): Promise<AxiosResponse<ITask>> => {
+  return await apiWithAuthAndErrorMessaging.post(
+      `/tasks/task/`,{
+        ...data
       }
   )
 }

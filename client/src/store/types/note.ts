@@ -13,6 +13,12 @@ export interface GetNotesSuccessPayload {
   results: INote[]
 }
 export enum NotesActionTypes {
-  GET_NOTES = "note/getNotes",
-  GET_NOTES_SUCCESS = "note/getNotesSuccess"
+  GET_NOTES = 'note/getNotes',
+  GET_NOTES_SUCCESS = 'note/getNotesSuccess'
+}
+
+export interface AddNoteSuccessPayload {
+  title: string
+  text: string
+  is_favorite: boolean
 }

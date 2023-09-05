@@ -1,1 +1,2 @@
-/// <reference types.tsx="vite/client" />
+// <reference types.tsx="vite/client" />
+

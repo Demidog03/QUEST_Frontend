@@ -40,6 +40,14 @@ const authSlice = createSlice({
         state.accessToken = action.payload.accessToken
         state.refreshToken = action.payload.refreshToken
       }
+    },
+    logout: (state) => {
+      state.refreshToken = ""
+      state.accessToken = ""
+      state.user = null
+      state.isAuthenticated = false
+      localStorage.removeItem("accessToken")
+      localStorage.removeItem("refreshToken")
     }
   },
   extraReducers: {
@@ -51,6 +59,7 @@ export const login = createAction<LoginPayload>('auth/login')
 export const loginSuccess = createAction<LoginSuccessPayload>('auth/loginSuccess')
 export const loginToken = createAction<LoginTokenPayload>('auth/loginToken')
 export const setToken = createAction<TokenPayload>('auth/setToken')
+export const logout = createAction('auth/logout')
 
 export const authUserSelector = ((state: RootState): IUser | null => state.auth.user)
 export const authPendingSelector = ((state: RootState): boolean => state.auth.pending)

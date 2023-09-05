@@ -32,3 +32,12 @@ export interface UpdateTaskColumnAction {
     columnId: number
   }
 }
+
+export interface AddTaskPayload {
+  name: string
+  description: string
+  end_date: string
+  deadline: string
+  column: string
+  project: number
+}

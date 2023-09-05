@@ -19,6 +19,12 @@ const notesSlice = createSlice({
       state.pending = false
       state.notes = action.payload.results
     },
+    addNote: (state) => {
+      state.pending = true
+    },
+    addNoteSuccess: (state ) => {
+      state.pending = false
+    },
 
   },
   extraReducers: {
@@ -28,6 +34,8 @@ const notesSlice = createSlice({
 
 export const getNotes = createAction('note/getNotes')
 export const getNotesSuccess = createAction<GetNotesSuccessPayload>('note/getNotesSuccess')
+export const addNote = createAction('note/addNotes')
+export const addNoteSuccess = createAction('note/addNoteSuccess')
 
 export const notesSelector = ((state: RootState): INote[] => state.note.notes)
 export const notesPendingSelector = ((state: RootState): boolean => state.note.pending)

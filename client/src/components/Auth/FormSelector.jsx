@@ -13,10 +13,10 @@ function FormSelector(props) {
                         : formSelectorStyle.defaultBtn}>Войти
                 </button>
             </Link>
-            <Link to={'/register'}>
-                <button className={pathname === '/register' ? formSelectorStyle.activeBtn
-                    : formSelectorStyle.defaultBtn}>Регистрация</button>
-            </Link>
+            {/*<Link to={'/register'}>*/}
+            {/*    <button className={pathname === '/register' ? formSelectorStyle.activeBtn*/}
+            {/*        : formSelectorStyle.defaultBtn}>Регистрация</button>*/}
+            {/*</Link>*/}
         </div>
     );
 }

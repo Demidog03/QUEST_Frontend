@@ -1,8 +1,8 @@
 import {call, put, takeLeading} from 'redux-saga/effects'
 import {AxiosResponse} from 'axios'
 import {TaskActionTypes, UpdateTaskColumnAction} from '../../types/task.ts'
-import {getTasks as getTasksApi, updateTaskColumn as updateTaskColumnApi} from '../../../api/task.ts'
-import {getTasksSuccess, updateTaskColumnSuccess} from './taskSlice.ts'
+import {getTasks as getTasksApi, updateTaskColumn as updateTaskColumnApi, addTask as addTaskApi} from '../../../api/task.ts'
+import {addTaskSuccess, getTasksSuccess, updateTaskColumnSuccess, addTask as addTaskAction} from './taskSlice.ts'
 import {ITask} from '../../../models/ITask.ts'
 
 export function* getTasks() {
@@ -23,8 +23,17 @@ export function* updateTaskColumn(action: UpdateTaskColumnAction) {
     }
   } catch {}
 }
+export function* addTask(action: any) {
+  try {
+    const response: AxiosResponse<ITask> = yield call(addTaskApi, action.payload)
+    if(response.data){
+      yield put(addTaskSuccess(response.data));
+    }
+  } catch {}
+}
 
 export function* taskSaga(){
   yield takeLeading(TaskActionTypes.GET_TASKS, getTasks)
   yield takeLeading(TaskActionTypes.UPDATE_TASK_COLUMN, updateTaskColumn)
+  yield takeLeading(addTaskAction.type, addTask)
 }

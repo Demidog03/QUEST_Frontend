@@ -42,14 +42,14 @@ apiWithAuthAndErrorMessaging.interceptors.request.use(async (config) => {
 
 apiWithAuthAndErrorMessaging.interceptors.response.use(undefined, async (error) => {
   if (axios.isAxiosError(error)) {
-    toast.error(error.response?.data.detail ?? 'Internal Server Error')
+    toast.error(error.response?.data.detail_ru ?? 'Internal Server Error')
   }
   return await Promise.reject(error)
 })
 
 api.interceptors.response.use(undefined, async (error) => {
   if (axios.isAxiosError(error)) {
-    toast.error(error.response?.data.detail ?? 'Internal Server Error')
+    toast.error(error.response?.data.detail_ru ?? 'Internal Server Error')
   }
   return await Promise.reject(error)
 })

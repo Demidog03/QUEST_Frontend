@@ -1,4 +1,4 @@
-import {FC, useEffect, useMemo} from 'react'
+import {FC, useEffect} from 'react'
 import cl from './Kanban.module.scss'
 import {useDispatch, useSelector} from 'react-redux'
 import {TasksSelector, updateTaskColumn} from '../../store/features/task/taskSlice.ts'
@@ -13,7 +13,6 @@ const Kanban: FC = () => {
   const params = useParams()
   const tasks = useSelector(TasksSelector)
   const columns = useSelector(projectColumnsSelector)
-  const columnsId = useMemo(() => columns.map(col => col.id), [columns])
   const {setNodeRef} = useDroppable({
     id: 'kanban',
     data: {
@@ -25,6 +24,10 @@ const Kanban: FC = () => {
   useEffect(() => {
     dispatch(getProjectColumns(params.id as string))
   }, [])
+
+  useEffect(() => {
+    console.log(tasks)
+  }, [tasks])
 
   // function createNewColumn() {
   //   const newColumn: IKanbanColumn = {
@@ -105,7 +108,6 @@ const Kanban: FC = () => {
                   id={column.id}
                   headerColor={column.color_code}
                   headerText={column.name}
-                  // createTask={() => createTask}
                   tasks={tasks?.filter(task => task.column === column.id)}
               />))
             }

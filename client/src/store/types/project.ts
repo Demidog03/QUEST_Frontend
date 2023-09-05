@@ -38,3 +38,14 @@ export interface GetProjectColumnsAction {
   type: ProjectActionTypes.GET_PROJECT_COLUMNS,
   payload: string
 }
+
+export interface AddProjectPayload {
+  name: string
+  description: string
+  deadline: string
+}
+
+export interface AddTagToProjectPayload {
+  tagId: number
+  projectId: number
+}

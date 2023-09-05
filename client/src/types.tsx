@@ -1,4 +1,4 @@
-import {ITask} from './models/ITask.ts'
+import {ITask} from './models/ITask'
 
 export interface IKanbanColumn {
   id: string | number
