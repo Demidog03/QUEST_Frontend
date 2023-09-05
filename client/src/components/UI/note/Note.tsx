@@ -12,6 +12,7 @@ interface NoteProps {
 }
 
 const Note: FC<NoteProps> = ({ title, text, isFavourite, className }) => {
+  console.log(isFavourite)
   return (
     <div className={classes.note + " " + className}>
       <div className={classes.flexcont}>

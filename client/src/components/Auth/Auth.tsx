@@ -1,9 +1,11 @@
 import {FC} from 'react';
 import authStyle from './scss/auth.module.scss'
 import logoPng from './../../assets/logo.png'
+// @ts-ignore
 import FormSelector from "./FormSelector.jsx";
 import LoginForm from "./LoginForm.jsx";
-import {Route, Routes, useLocation} from "react-router-dom";
+import {useLocation} from "react-router-dom";
+// @ts-ignore
 import RegisterForm from "./RegisterForm.jsx";
 
 const Auth: FC = () =>  {

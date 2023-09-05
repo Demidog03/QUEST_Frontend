@@ -1,7 +1,9 @@
 import{useEffect ,FC} from 'react';
 import authFormStyle from './scss/authForm.module.scss'
+// @ts-ignore
 import TextInput from "./TextInput.jsx";
 import {IoKey, IoMail} from "react-icons/io5";
+// @ts-ignore
 import PassInput from "./PassInput.jsx";
 import authStyle from "./scss/auth.module.scss";
 import {useDispatch, useSelector} from 'react-redux'
