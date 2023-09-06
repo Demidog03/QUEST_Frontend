@@ -18,7 +18,7 @@ const SidebarLink: FC<SidebarLinkProps> = ({link, index}) => {
             to={link.path}
         >
             {link.path === currentPath ? (
-                <img src={link.icon.slice(0, -4) + 'active.svg'} alt={link.name} className={classes['side-icon']} />
+                <img src={link.icon} alt={link.name} className={classes['side-icon']} />
             ) : (
                 <img src={link.icon} alt={link.name} className={classes['side-icon']} />
             )}
