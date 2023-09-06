@@ -9,6 +9,7 @@
   justify-content: center;
   align-items: flex-start;
   gap: 10px;
+  cursor: pointer;
 
   .name{
     display: flex;
@@ -19,6 +20,17 @@
     h2{
       font-weight: 600;
       font-size: 0.875rem;
+    }
+  }
+
+  .description{
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    color: rgba(86, 85, 92, 0.8);
+
+    p{
+      font-size: 0.8rem;
     }
   }
 

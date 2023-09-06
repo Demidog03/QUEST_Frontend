@@ -7,9 +7,10 @@ interface ButtonProps extends ButtonHTMLAttributes<any>{
   textColor: string
   bgColor: string
   style?: any,
+  onClick?: () => void
 }
 
-const Button: FC<ButtonProps> = ({className, bgColor, textColor, children, style, ...props }) => {
+const Button: FC<ButtonProps> = ({className, bgColor, textColor, children, style, onClick }) => {
   const [isHovering, setIsHovering] = useState<boolean>(false);
 
   const handleMouseEnter = () => {
@@ -39,14 +40,15 @@ const Button: FC<ButtonProps> = ({className, bgColor, textColor, children, style
 
   return (
       <motion.div
+          style={buttonStyle}
           whileHover={{scale: 1.08}}
           transition={{type: 'spring', stiffness: 200}}
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
+          className={className}
+          onClick={onClick}
       >
-        <div style={buttonStyle} className={className} {...props}>
           {children}
-        </div>
       </motion.div>
   )
 }

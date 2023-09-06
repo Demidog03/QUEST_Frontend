@@ -43,6 +43,7 @@
   display: flex;
   gap: 3px;
   align-items: flex-end;
+  flex-wrap: wrap;
 }
 .projectCard .element {
   padding: 4px 7px;
@@ -114,6 +115,7 @@
   display: flex;
   flex-direction: column;
   max-width: 372px;
+  justify-content: space-between;
 }
 .projectCard .modal .description h2 {
   font-size: 1rem;

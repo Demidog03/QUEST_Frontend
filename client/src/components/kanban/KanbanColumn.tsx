@@ -59,9 +59,10 @@ export const KanbanColumn: FC<KanbanRowProps> = ({id, headerColor, headerText, t
 
           <div className={cl.tasks} ref={setNodeRef}>
             <SortableContext items={tasksId as number[]} id={id as string} >
-              {tasks?.map(task => <KanbanCard key={task.id} id={task.id} tags={task.task_tags} name={task.name} users={task.assigned_users} columnId={task.column} priority={task.priority}/>)}
+              {tasks?.map(task => <KanbanCard key={task.id} id={task.id} tags={task.task_tags} name={task.name} description={task.description} users={task.assigned_users} columnId={task.column} priority={task.priority}/>)}
             </SortableContext>
           </div>
+
         <Modal setVisible={setIsOpen} visible={isOpen} >
           <Stack direction="column" gap={2} sx={{ minWidth: '350px' }}>
             <h2>Create a task</h2>

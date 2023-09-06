@@ -4,13 +4,13 @@ import classes from './sidebar.module.scss';
 import overviewIcon from '../../assets/navicons/overview.svg';
 import calendarIcon from '../../assets/navicons/calendar.svg';
 import analyticsIcon from '../../assets/navicons/analytics.svg';
-import projectsIcon from 'assets/navicons/projects.svg';
-import teamsIcon from 'assets/navicons/teams.svg';
-import exampleProj from 'assets/navicons/exampleproj.svg';
-import logo from 'assets/navicons/logo.svg';
+import projectsIcon from '../../assets/navicons/projects.svg';
+import teamsIcon from '../../assets/navicons/teams.svg';
+import exampleProj from '../../assets/navicons/exampleproj.svg';
+import logo from '../../assets/navicons/logo.svg';
 import SidebarLink from '../UI/sidebar-link/SidebarLink.tsx';
 import Profile from '../UI/profile/Profile.tsx';
-import plusIcon from 'assets/navicons/plus.svg';
+import plusIcon from '../../assets/navicons/plus.svg';
 import {useDispatch, useSelector} from 'react-redux'
 import {authUserSelector} from "../../store/features/auth/authSlice.ts";
 import {ISidebarLink} from '../../types.ts'

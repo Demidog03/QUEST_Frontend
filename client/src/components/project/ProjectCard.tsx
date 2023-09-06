@@ -183,9 +183,11 @@ const ProjectCard: FC<ProjectCardProps> = ({project}) => {
             </div>
 
             <div className={cl.description}>
-              <h2>Description</h2>
-              <p>{project?.description}</p>
-              <Button onClick={handleClickTasks} bgColor="rgba(123, 104, 238, 0.3)" textColor="rgba(123, 104, 238, 1)" style={{alignSelf: 'flex-end'}}>Tasks <FaTasks/></Button>
+              <div>
+                <h2>Description</h2>
+                <p>{project?.description}</p>
+              </div>
+              <Button onClick={handleClickTasks} bgColor="rgba(123, 104, 238, 0.3)" textColor="rgba(123, 104, 238, 1)">Tasks <FaTasks/></Button>
             </div>
           </div>
         </Modal>
