@@ -1,5 +1,5 @@
 import {JSX, FC, ReactNode} from 'react'
-import classes from "Modal.module.scss";
+import classes from "./modal.module.scss";
 import {AnimatePresence, motion} from 'framer-motion'
 
 interface ModalProps {
