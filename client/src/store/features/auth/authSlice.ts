@@ -15,7 +15,9 @@ const initialState: AuthState =  {
   user: null,
   accessToken: "",
   refreshToken: "",
-  isAuthenticated: false
+  isAuthenticated: false,
+  level: 0,
+  xp: 0
 }
 
 const authSlice = createSlice({
@@ -48,7 +50,15 @@ const authSlice = createSlice({
       state.isAuthenticated = false
       localStorage.removeItem("accessToken")
       localStorage.removeItem("refreshToken")
-    }
+    },
+    getLevel: (state) => {
+      state.pending = true;
+    },
+    getLevelSuccess: (state, action: PayloadAction<{xp: number, level: number}>) => {
+      state.pending = false;
+      state.xp = action.payload.xp
+      state.level = action.payload.level
+    },
   },
   extraReducers: {
 
@@ -60,8 +70,12 @@ export const loginSuccess = createAction<LoginSuccessPayload>('auth/loginSuccess
 export const loginToken = createAction<LoginTokenPayload>('auth/loginToken')
 export const setToken = createAction<TokenPayload>('auth/setToken')
 export const logout = createAction('auth/logout')
+export const getLevel = createAction<{token: string}>('auth/getLevel')
+export const getLevelSuccess = createAction<{xp: number, level: number}>('auth/getLevelSuccess')
 
 export const authUserSelector = ((state: RootState): IUser | null => state.auth.user)
+export const authLevelSelector = ((state: RootState): number | null => state.auth.level)
+export const authXpSelector = ((state: RootState): number | null => state.auth.xp)
 export const authPendingSelector = ((state: RootState): boolean => state.auth.pending)
 export const authAccessTokenSelector = ((state: RootState): string => state.auth.accessToken)
 export const authRefreshTokenSelector = ((state: RootState): string => state.auth.refreshToken)

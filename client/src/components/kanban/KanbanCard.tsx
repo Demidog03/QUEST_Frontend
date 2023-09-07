@@ -106,7 +106,7 @@ const KanbanCard: FC<KanbanCardProps> = ({id, tags, name, description, users, pr
             <Tag
                 color="157, 155, 161"
                 name={priority}
-                style={buttonStyles}
+                style={{...buttonStyles, alignSelf: 'flex-end'}}
             />
           </div>
         </div>

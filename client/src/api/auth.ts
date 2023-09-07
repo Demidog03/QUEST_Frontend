@@ -1,4 +1,4 @@
-import {api} from './api.ts'
+import {api, apiWithAuthAndErrorMessaging} from './api.ts'
 import {AxiosResponse} from 'axios'
 import {LoginPayload, LoginResponse, LoginTokenPayload} from '../store/types/auth.ts'
 
@@ -23,6 +23,16 @@ export const loginTokenUser = async ({accessToken}: LoginTokenPayload): Promise<
       {
         headers: {
           Authorization: `Bearer ${accessToken}`
+        }
+      }
+  )
+}
+
+export const getLevel = async ({token} : {token: string}): Promise<AxiosResponse> => {
+  return await apiWithAuthAndErrorMessaging.get(
+      '/users/person/get_profile/',{
+        data: {
+          token
         }
       }
   )

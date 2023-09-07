@@ -1,4 +1,4 @@
-import {type FC, useMemo, useState} from 'react'
+import {type FC, useEffect, useMemo, useState} from 'react'
 // @ts-ignore
 import cl from './Kanban.module.scss'
 import {BsPlus} from 'react-icons/bs'
@@ -9,6 +9,8 @@ import {useDroppable} from '@dnd-kit/core'
 import {SortableContext} from '@dnd-kit/sortable'
 import Modal from 'components/UI/modal/Modal.tsx'
 import {
+  Checkbox,
+  FormControl, InputLabel, ListItemText, MenuItem, OutlinedInput, Select, SelectChangeEvent,
   Stack,
   TextField
 } from '@mui/material'
@@ -20,6 +22,9 @@ import {useDispatch, useSelector} from 'react-redux'
 import {useParams} from 'react-router-dom'
 import {addTask, getTasks, tasksPendingSelector} from '../../store/features/task/taskSlice.ts'
 import {MoonLoader} from 'react-spinners'
+import {getTags} from '../../api/tag.ts'
+import {ITag2} from '../../models/ITag.ts'
+import {getUsers} from '../../api/users.ts'
 
 interface KanbanRowProps {
   id: number | string
@@ -35,15 +40,49 @@ export const KanbanColumn: FC<KanbanRowProps> = ({id, headerColor, headerText, t
   const [isOpen, setIsOpen] = useState<boolean>(false)
   const tasksId = useMemo(() => tasks?.map(task => task.id), [tasks])
   const {register, handleSubmit, control} = useForm()
+  const [selectedTagsId, setSelectedTagsId] = useState<number[]>([]);
+  const [tags, setTags] = useState<ITag2[]>([])
+  const [selectedUsersId, setSelectedUsersId] = useState<number[]>([]);
+  const [users, setUsers] = useState<{ id: number, username: string }[]>([])
+
   const {setNodeRef, isOver} = useDroppable({
     id,
     data: {
       columnId: id
     }
   })
-
+  useEffect(() => {
+    void(async () => {
+      const response = await getTags()
+      setTags(response.data.results)
+      const response2 = await getUsers()
+      // @ts-ignore
+      setUsers(response2.data)
+    })()
+  }, [])
+  const handleChange = (event: SelectChangeEvent<typeof selectedTagsId>) => {
+    const { target: { value } } = event;
+    setSelectedTagsId(typeof value === 'string' ? [Number(value)] : [...value])
+  };
+  const handleChangeUsers = (event: SelectChangeEvent<typeof selectedUsersId>) => {
+    const { target: { value } } = event;
+    setSelectedUsersId(typeof value === 'string' ? [Number(value)] : [...value])
+  };
+  const getSelectedTagNames = () => {
+    return tags.filter(tag => selectedTagsId.includes(tag.id)).map(tag => tag.name);
+  };
+  const getSelectedUserNames = () => {
+    return users.filter(user => selectedUsersId.includes(user.id)).map(user => user.username);
+  };
   function submitForm(data: any){
-    dispatch(addTask({...data, column: id, project: Number(params.id), deadline: data?.deadline?.toFormat('yyyy-MM-dd'), end_date: data?.endDate?.toFormat('yyyy-MM-dd')}))
+    dispatch(addTask({
+      ...data,
+      column: id,
+      project: Number(params.id), deadline: data?.deadline?.toFormat('yyyy-MM-dd'),
+      end_date: data?.endDate?.toFormat('yyyy-MM-dd'),
+      tags: [...selectedTagsId],
+      users: [...selectedUsersId]
+    }))
     setIsOpen(false)
   }
 
@@ -108,6 +147,48 @@ export const KanbanColumn: FC<KanbanRowProps> = ({id, headerColor, headerText, t
                     </LocalizationProvider>
                 )}
             />
+              <FormControl sx={{width: '100%', position: 'relative' }}>
+                <InputLabel  id="tags-checkbox-label">Tag</InputLabel>
+                <Select
+                    fullWidth
+                    labelId="tags-checkbox-label"
+                    id="tags-checkbox"
+                    multiple
+                    value={selectedTagsId}
+                    onChange={handleChange}
+                    input={<OutlinedInput label="Tag" />}
+                    sx={{ position: 'relative' }}
+                    renderValue={() => getSelectedTagNames().join(', ')}
+                >
+                  {tags.map((tag) => (
+                      <MenuItem key={tag.id} value={tag.id}>
+                        <Checkbox checked={selectedTagsId.indexOf(tag.id) > -1} />
+                        <ListItemText primary={tag.name} />
+                      </MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
+              <FormControl sx={{width: '100%', position: 'relative' }}>
+                <InputLabel  id="users-checkbox-label">Assigned users</InputLabel>
+                <Select
+                    fullWidth
+                    labelId="users-checkbox-label"
+                    id="users-checkbox"
+                    multiple
+                    value={selectedUsersId}
+                    onChange={handleChangeUsers}
+                    input={<OutlinedInput label="Assigned users" />}
+                    sx={{ position: 'relative' }}
+                    renderValue={() => getSelectedUserNames().join(', ')}
+                >
+                  {users.map((user) => (
+                      <MenuItem key={user.id} value={user.id}>
+                        <Checkbox checked={selectedUsersId.indexOf(user.id) > -1} />
+                        <ListItemText primary={user.username} />
+                      </MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
             <Button bgColor="rgba(123, 104, 238, 0.3" textColor="rgba(123, 104, 238, 1" onClick={handleSubmit(submitForm)}>Submit</Button>
           </Stack>
         </Modal>

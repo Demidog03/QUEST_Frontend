@@ -7,6 +7,8 @@ export interface AuthState {
   accessToken: string
   refreshToken: string
   isAuthenticated: boolean
+  level: number
+  xp: number
 }
 
 export enum AuthActionTypes {

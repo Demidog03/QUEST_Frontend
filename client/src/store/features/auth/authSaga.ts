@@ -1,7 +1,7 @@
 import { call, put, takeLeading } from 'redux-saga/effects';
 import { AuthActionTypes, LoginAction, LoginTokenAction } from '../../types/auth.ts'
-import { loginSuccess } from './authSlice.ts';
-import { loginUser as loginUserApi, loginTokenUser as loginTokenUserApi } from '../../../api/auth'
+import {getLevel, getLevelSuccess, loginSuccess} from './authSlice.ts'
+import { loginUser as loginUserApi, loginTokenUser as loginTokenUserApi, getLevel as getLevelApi } from '../../../api/auth'
 
 // fetchPosts worker
 export function* loginSaga(action: LoginAction) {
@@ -20,10 +20,18 @@ export function* loginTokenSaga(action: LoginTokenAction) {
   } catch {}
 }
 
+export function* getLevelSaga(action: any) {
+  try{
+    const { data } = yield call(getLevelApi, action.payload)
+    yield put(getLevelSuccess({ xp: data.xp, level: data.level }));
+  } catch {}
+}
+
 // post watcher
 function* authSaga() {
-  yield takeLeading(AuthActionTypes.LOGIN, loginSaga); // Use loginSaga directly
-  yield takeLeading(AuthActionTypes.LOGIN_TOKEN, loginTokenSaga); // Use loginSaga directly
+  yield takeLeading(AuthActionTypes.LOGIN, loginSaga);
+  yield takeLeading(AuthActionTypes.LOGIN_TOKEN, loginTokenSaga);
+  yield takeLeading(getLevel.type, getLevelSaga);
 }
 
 export default authSaga;
