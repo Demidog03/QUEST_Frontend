@@ -29,8 +29,10 @@
 .kanbanCard .description {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   gap: 5px;
   color: rgba(86, 85, 92, 0.8);
+  width: 100%;
 }
 .kanbanCard .description p {
   font-size: 0.8rem;
@@ -40,10 +42,11 @@
   flex-direction: column;
   gap: 10px;
 }
-.kanbanCard .text {
+.kanbanCard .cardDraggable {
   width: 100%;
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  gap: 10px;
   justify-content: space-between;
   cursor: grab;
   pointer-events: auto;

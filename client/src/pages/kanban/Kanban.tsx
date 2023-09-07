@@ -26,71 +26,9 @@ const Kanban: FC = () => {
     dispatch(getTasks(+params.id))
   }, [params.id])
 
-
   useEffect(() => {
     console.log(tasks)
   }, [tasks])
-
-  // function createNewColumn() {
-  //   const newColumn: IKanbanColumn = {
-  //     id: generateId(),
-  //     title: `Column ${(1 + columns.length)}`,
-  //     headerColor: 'rgba(184, 183, 190, 1)',
-  //   }
-  //
-  //   setColumns([...columns, newColumn])
-  // }
-
-  // useEffect(() => {
-  //   console.log(tasks)
-  //   if(tasks && tasks.length !== 0){
-  //     tasks.forEach(task => {
-  //       if (task.status==="WAITING"){
-  //         createTask(1, task)
-  //       }
-  //       else if (task.status==="IN_WORK"){
-  //         createTask(2, task)
-  //       }
-  //       else if (task.status==="DONE"){
-  //         createTask(3, task)
-  //       }
-  //     })
-  //   }
-  // }, [tasks])
-  //
-
-  // function generateId(){
-  //   return new Date().valueOf();
-  // }
-
-  // function onDragEnd(event: DragEndEvent){
-  //   const {active, over} = event
-  //   if (!over) {
-  //     return
-  //   }
-  //
-  //   const activeColumnId = active.id
-  //   const overColumnId = over.id
-  //   if (activeColumnId === overColumnId) {
-  //     return
-  //   }
-  //
-  //   // setColumns(columns => {
-  //   //   const activeColumnIndex = columns.findIndex(col => col.id === activeColumnId)
-  //   //   const overColumnIndex = columns.findIndex(col => col.id === overColumnId)
-  //   //
-  //   //   return arrayMove(columns, activeColumnIndex, overColumnIndex);
-  //   // })
-  // }
-
-  // function createTask(columnId: number | string, task: ITask){
-  //   const newTask: IKanbanTask = {
-  //     columnId,
-  //     ...task
-  //   }
-  //
-  //   setKanbanTasks(prevTasks => [...prevTasks, newTask])
-  // }
 
   function handleDragEnd(event: DragEndEvent) {
     const {active, over} = event
@@ -114,42 +52,6 @@ const Kanban: FC = () => {
               />))
             }
           </DndContext>
-          {/*  <KanbanRow headerColor="rgba(184, 183, 190, 1)" headerText="Open">*/}
-          {/*    <div className={cl.tasks}>*/}
-          {/*      {tasks?.map(task =>*/}
-          {/*        task.status === 'WAITING'*/}
-          {/*          &&*/}
-          {/*          <div>*/}
-          {/*              <KanbanCard id={task.id} status={task.status} tags={task.task_tags} name={task.name} users={task.assigned_users}/>*/}
-          {/*          </div>*/}
-          {/*      )}*/}
-          {/*    </div>*/}
-          {/*  </KanbanRow>*/}
-
-          {/*<KanbanRow headerColor="rgba(85, 119, 255, 1)" headerText="In Progress">*/}
-          {/*  <div className={cl.tasks}>*/}
-          {/*    {tasks?.map(task =>*/}
-          {/*        task.status === 'In Progress'*/}
-          {/*        &&*/}
-          {/*        <div>*/}
-          {/*            <KanbanCard id={task.id} status={task.status} tags={task.task_tags} name={task.name} users={task.assigned_users}/>*/}
-          {/*        </div>*/}
-          {/*    )}*/}
-          {/*  </div>*/}
-          {/*</KanbanRow>*/}
-
-          {/*<KanbanRow headerColor="rgba(0, 184, 132, 1)" headerText="Done">*/}
-          {/*  <div className={cl.tasks}>*/}
-          {/*    {tasks?.map(task =>*/}
-          {/*        task.status === 'DONE'*/}
-          {/*        &&*/}
-          {/*        <div>*/}
-          {/*            <KanbanCard id={task.id} status={task.status} tags={task.task_tags} name={task.name} users={task.assigned_users}/>*/}
-          {/*        </div>*/}
-          {/*    )}*/}
-          {/*  </div>*/}
-          {/*</KanbanRow>*/}
-
           </div>
       </div>
   )

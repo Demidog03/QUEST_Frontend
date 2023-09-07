@@ -46,6 +46,6 @@ export const updateTaskColumnSuccess = createAction<ITask>('task/updateTaskColum
 export const addTask = createAction<AddTaskPayload>('task/addTask')
 export const addTaskSuccess = createAction<ITask>('task/addTask')
 export const TasksSelector = ((state: RootState): ITask[] | null => state.task.tasks)
-export const TasksPendingSelector = ((state: RootState): boolean => state.task.pending)
+export const tasksPendingSelector = ((state: RootState): boolean => state.task.pending)
 
 export default taskSlice.reducer

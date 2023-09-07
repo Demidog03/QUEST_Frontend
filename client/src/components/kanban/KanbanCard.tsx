@@ -69,44 +69,48 @@ const KanbanCard: FC<KanbanCardProps> = ({id, tags, name, description, users, pr
         </div>
         <div ref={setNodeRef}
              {...listeners}
-             className={cl.text}
              onMouseEnter={() => setIsOnHover(true)}
              onMouseLeave={() => setIsOnHover(false)}
+             className={cl.cardDraggable}
              style={{
                cursor: isDragging ? 'grabbing' : 'grab',
              }}
         >
           <div className={cl.nameAndDescription}>
             <div className={cl.name}><BiTask/><h2>{name}</h2></div>
-            <div className={cl.description}><HiDocumentDuplicate/><p>{description}</p></div>
+            <div className={cl.description}>
+              <p>{description}</p>
+              {columnId === 6 && <IoCheckmarkDoneCircleSharp style={{fontSize: '1.4rem', minWidth: '1rem', color: 'rgb(0, 197, 21)'}}/>}
+            </div>
+
           </div>
-          {columnId === 3 && <IoCheckmarkDoneCircleSharp style={{fontSize: '1.4rem', color: 'rgb(0, 197, 21)'}}/>}
+
+          <div className={cl.cardBottom}>
+            <div className={cl.users}>
+              {users.length !== 0 ? users.map(user =>
+                      <Button
+                          textColor="rgba(157, 155, 161, 1)"
+                          bgColor="rgba(233, 232, 236, 1)"
+                          style={buttonStyles}>
+                        @ {user.username}
+                      </Button>)
+                  :
+                  <Button
+                      textColor="rgba(157, 155, 161, 1)"
+                      bgColor="rgba(233, 232, 236, 1)"
+                      style={{...buttonStyles, pointerEvents: 'none'}}
+                      disabled={true}
+                  >No users</Button>
+              }
+            </div>
+            <Tag
+                color="157, 155, 161"
+                name={priority}
+                style={buttonStyles}
+            />
+          </div>
         </div>
 
-        <div className={cl.cardBottom}>
-          <div className={cl.users}>
-            {users.length !== 0 ? users.map(user =>
-                <Button
-                    textColor="rgba(157, 155, 161, 1)"
-                    bgColor="rgba(233, 232, 236, 1)"
-                    style={buttonStyles}>
-                  @ {user.username}
-                </Button>)
-                :
-                <Button
-                    textColor="rgba(157, 155, 161, 1)"
-                    bgColor="rgba(233, 232, 236, 1)"
-                    style={{...buttonStyles, pointerEvents: 'none'}}
-                    disabled={true}
-                >No users</Button>
-            }
-          </div>
-          <Tag
-              color="157, 155, 161"
-              name={priority}
-              style={buttonStyles}
-          />
-        </div>
         {/*<Modal visible={isOpen} setVisible={setIsOpen}>*/}
         {/*  <h1>Title: {name}</h1>*/}
         {/*</Modal>*/}
