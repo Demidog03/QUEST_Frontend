@@ -28,6 +28,7 @@ export function* addTask(action: any) {
     const response: AxiosResponse<ITask> = yield call(addTaskApi, action.payload)
     if(response.data){
       yield put(addTaskSuccess(response.data));
+      yield getTasks(action.payload.project)
     }
   } catch {}
 }

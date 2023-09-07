@@ -41,8 +41,8 @@ export const KanbanColumn: FC<KanbanRowProps> = ({id, headerColor, headerText, t
   })
 
   function submitForm(data: any){
-    dispatch(addTask({...data, column: id, project: Number(params.id), deadline: data.deadline.toFormat('yyyy-MM-dd'), end_date: data.endDate.toFormat('yyyy-MM-dd')}))
-    dispatch(getTasks())
+    dispatch(addTask({...data, column: id, project: Number(params.id), deadline: data?.deadline?.toFormat('yyyy-MM-dd'), end_date: data?.endDate?.toFormat('yyyy-MM-dd')}))
+    setIsOpen(false)
   }
 
   return (
