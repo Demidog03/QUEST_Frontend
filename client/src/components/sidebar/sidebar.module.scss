@@ -5,15 +5,15 @@
         position: relative;
         padding: 0 24px;
         .logo-container {
-            padding: 17% 0% 0% 10%;
             font-size: 1.5rem;
             text-decoration: none;
             color: black;
-            .side-logo {
-                // padding-left: 10%;
-                margin-left: 10%;
-                margin-top: 10%;
-            }
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            padding: 14px;
+            margin-top: 30px;
+            margin-bottom: 15px;
         }
         .side-links-container {
             border-bottom: 1px solid #E6E4F0;

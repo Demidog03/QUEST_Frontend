@@ -62,7 +62,7 @@ const Sidebar: FC = () => {
             <Link className={classes['logo-container']}
                   to={'/'}>
               <img src={logo} alt='spas' className={classes['side-logo']} />
-              <span className={`${classes['side-logo-name']} ${classes['medium']}`}>SPAS</span>
+              <span className={`${classes['side-logo-name']} ${classes['medium']}`}>QUEST</span>
             </Link>
             <div className={classes['side-links-container']}>
               {sideLinks.map((link, index) => (

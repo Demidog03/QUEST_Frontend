@@ -7,14 +7,15 @@
   padding: 0 24px;
 }
 .container .sidebar .logo-container {
-  padding: 17% 0% 0% 10%;
   font-size: 1.5rem;
   text-decoration: none;
   color: black;
-}
-.container .sidebar .logo-container .side-logo {
-  margin-left: 10%;
-  margin-top: 10%;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 14px;
+  margin-top: 30px;
+  margin-bottom: 15px;
 }
 .container .sidebar .side-links-container {
   border-bottom: 1px solid #E6E4F0;
