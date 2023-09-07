@@ -15,8 +15,8 @@ export const getTasks = async (projectId: number): Promise<AxiosResponse<GetTask
 }
 
 export const updateTaskColumn = async ({columnId, taskId}: {columnId: number, taskId: number}): Promise<AxiosResponse<ITask>> => {
-  return await apiWithAuthAndErrorMessaging.patch(
-      `/tasks/task/${taskId}/`,{
+  return await apiWithAuthAndErrorMessaging.put(
+      `/tasks/task_tag/${taskId}/do/change_task_column/`,{
         column: columnId
       }
   )
