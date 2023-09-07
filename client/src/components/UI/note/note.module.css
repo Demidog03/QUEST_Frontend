@@ -1,10 +1,12 @@
 .note {
-  width: 21.25vw;
   border-radius: 10px;
   border: 1px solid #E6E4F0;
   display: flex;
   flex-direction: column;
-  margin-top: 10px;
+  width: 100%;
+  margin: 5px 0;
+  padding: 10px 5px;
+  background-color: white;
 }
 .note .flexcont {
   margin-top: 2%;
@@ -16,7 +18,7 @@
   height: 20px;
 }
 .note .flexcont .date {
-  color: #A3A3A3;
+  color: #3d3d3d;
   width: 15vw;
   padding-left: 4%;
 }

@@ -20,7 +20,7 @@ const Note: FC<NoteProps> = ({ title, text, isFavourite, className }) => {
           <img src={paperIcon} className={classes.docicon} />
           <div className={classes.date}>{title}</div>
         </div>
-        <img src={threedots} className={classes.threedots} />
+        {/*<img src={threedots} className={classes.threedots} />*/}
       </div>
       <div className={classes.text}>{text}</div>
     </div>

@@ -2,7 +2,7 @@
     display: flex;
 
     .notes-container {
-        width: 24.4vw;
+        width: 20vw;
 
         .bar {
             height: 100vh;
@@ -21,7 +21,6 @@
                 .notes-first-child {
                     display: flex;
                     align-items: center;
-                    width: 20vw;
 
                     span {
                         font-size: large;
@@ -36,6 +35,7 @@
                 align-items: center;
                 max-height: 90vh;
                 overflow-y: auto;
+                padding: 5px 10px;
             }
         }
     }
