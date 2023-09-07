@@ -33,7 +33,7 @@ export const KanbanColumn: FC<KanbanRowProps> = ({id, headerColor, headerText, t
   const [isOpen, setIsOpen] = useState<boolean>(false)
   const tasksId = useMemo(() => tasks?.map(task => task.id), [tasks])
   const {register, handleSubmit, control} = useForm()
-  const {setNodeRef} = useDroppable({
+  const {setNodeRef, isOver} = useDroppable({
     id,
     data: {
       columnId: id
@@ -57,9 +57,9 @@ export const KanbanColumn: FC<KanbanRowProps> = ({id, headerColor, headerText, t
           </div>
         </div>
 
-          <div className={cl.tasks} ref={setNodeRef}>
+          <div className={cl.tasks} ref={setNodeRef} style={{background: isOver ? 'rgba(0, 0, 0, 0.05)' : 'transparent'}}>
             <SortableContext items={tasksId as number[]} id={id as string} >
-              {tasks?.map(task => <KanbanCard key={task.id} id={task.id} tags={task.task_tags} name={task.name} description={task.description} users={task.assigned_users} columnId={task.column} priority={task.priority}/>)}
+              {tasks.length !== 0 ? tasks.map(task => <KanbanCard key={task.id} id={task.id} tags={task.task_tags} name={task.name} description={task.description} users={task.assigned_users} columnId={task.column} priority={task.priority}/>) : <p className={cl.noTasksText}>No tasks</p>}
             </SortableContext>
           </div>
 

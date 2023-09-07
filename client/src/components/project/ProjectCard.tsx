@@ -85,11 +85,11 @@ const ProjectCard: FC<ProjectCardProps> = ({project}) => {
   }
   return (
       <div className={cl.projectCard}>
-        <img src={project?.mini_header} className={cl.cardImage} alt=""/>
+        <img src={`${import.meta.env.VITE_BACKEND_URL ?? ''}` + project?.mini_header} className={cl.cardImage} alt=""/>
         <div className={cl.content}>
           <div className={cl.info}>
             <div className={cl.infoLeft}>
-              <img src={project?.logo} className={cl.projectImage} alt={project?.name}/>
+              <img src={`${import.meta.env.VITE_BACKEND_URL ?? ''}` + project?.logo} className={cl.projectImage} alt={project?.name}/>
               <h2 className={cl.projectName}>{project?.name}</h2>
             </div>
             <div style={{position: 'relative'}}>
@@ -112,7 +112,7 @@ const ProjectCard: FC<ProjectCardProps> = ({project}) => {
         </div>
         <Modal visible={isModalOpen} setVisible={setIsModalOpen} className={cl.modal}>
           <div className={cl.header}>
-            <img src={project?.header} alt={project?.header}/>
+            <img src={`${import.meta.env.VITE_BACKEND_URL ?? ''}` + project?.header} alt={project?.header}/>
             <motion.div
                 onClick={() => setIsModalOpen(false)}
                 whileHover={{scale: 1.1}}
@@ -122,7 +122,7 @@ const ProjectCard: FC<ProjectCardProps> = ({project}) => {
             </motion.div>
             <div className={cl.headerInfo}>
               <div className={cl.heading}>
-                <img src={project?.logo} className={cl.projectImage} alt={project?.name}/>
+                <img src={`${import.meta.env.VITE_BACKEND_URL ?? ''}` + project?.logo} className={cl.projectImage} alt={project?.name}/>
                 <h2 className={cl.projectName}>{project?.name}</h2>
               </div>
               <div className={cl.dates}>

@@ -10,6 +10,8 @@ import {CSS} from '@dnd-kit/utilities'
 import {BiTask} from 'react-icons/bi'
 import Modal from 'components/UI/modal/Modal.tsx'
 import {stopPropagation} from '@dnd-kit/core/dist/sensors/events'
+import {IoCheckmarkDoneCircleSharp} from 'react-icons/io5'
+import {MdModeEdit} from 'react-icons/md'
 
 interface KanbanCardProps {
   id: number
@@ -23,7 +25,8 @@ interface KanbanCardProps {
 
 const KanbanCard: FC<KanbanCardProps> = ({id, tags, name, description, users, priority, columnId, }) => {
   const [isOpen, setIsOpen] = useState<boolean>(false)
-  const { attributes, listeners, transform, setNodeRef } = useDraggable({
+  const [isOnHover, setIsOnHover] = useState<boolean>(false)
+  const { attributes, listeners, transform, setNodeRef, isDragging } = useDraggable({
     id,
     data: {
       id,
@@ -38,28 +41,65 @@ const KanbanCard: FC<KanbanCardProps> = ({id, tags, name, description, users, pr
   }
 
   const style = {
-    transform: CSS.Translate.toString(transform)
+    transform: CSS.Translate.toString(transform),
+    opacity: isDragging ? '0.5' : '1',
+    boxShadow: isOnHover ? '0 0 15px rgba(0, 184, 132, 0.2)' : 'none'
   }
 
   return (
       <div className={cl.kanbanCard}
-           {...listeners}
            {...attributes}
-           ref={setNodeRef}
            style={style}
       >
-        <div className={cl.tags}>{tags?.map(tag => <Tag name={tag.tag.name} color={tag.tag.color_code}/>)}</div>
-        <div className={cl.name}><BiTask/><h2>{name}</h2></div>
-        <div className={cl.description}><HiDocumentDuplicate/><p>{description}</p></div>
+        <div className={cl.cardTop}>
+          <div className={cl.tags}>{tags?.length !== 0
+              ?
+              tags?.map(tag => <Tag name={tag.tag.name} color={tag.tag.color_code}/>)
+              :
+              <Button
+                  textColor="rgba(157, 155, 161, 1)"
+                  bgColor="rgba(233, 232, 236, 1)"
+                  style={{...buttonStyles, pointerEvents: 'none'}}
+                  disabled={true}
+              >No tags</Button>
+          }</div>
+          <Button textColor="rgba(157, 155, 161, 1)"
+                  bgColor="rgba(233, 232, 236, 1)"
+                  style={buttonStyles}><MdModeEdit/> Edit</Button>
+        </div>
+        <div ref={setNodeRef}
+             {...listeners}
+             className={cl.text}
+             onMouseEnter={() => setIsOnHover(true)}
+             onMouseLeave={() => setIsOnHover(false)}
+             style={{
+               cursor: isDragging ? 'grabbing' : 'grab',
+             }}
+        >
+          <div className={cl.nameAndDescription}>
+            <div className={cl.name}><BiTask/><h2>{name}</h2></div>
+            <div className={cl.description}><HiDocumentDuplicate/><p>{description}</p></div>
+          </div>
+          {columnId === 3 && <IoCheckmarkDoneCircleSharp style={{fontSize: '1.4rem', color: 'rgb(0, 197, 21)'}}/>}
+        </div>
+
         <div className={cl.cardBottom}>
           <div className={cl.users}>
-            {users.map(user =>
+            {users.length !== 0 ? users.map(user =>
                 <Button
                     textColor="rgba(157, 155, 161, 1)"
                     bgColor="rgba(233, 232, 236, 1)"
                     style={buttonStyles}>
                   @ {user.username}
-                </Button>)}
+                </Button>)
+                :
+                <Button
+                    textColor="rgba(157, 155, 161, 1)"
+                    bgColor="rgba(233, 232, 236, 1)"
+                    style={{...buttonStyles, pointerEvents: 'none'}}
+                    disabled={true}
+                >No users</Button>
+            }
           </div>
           <Tag
               color="157, 155, 161"
@@ -67,12 +107,6 @@ const KanbanCard: FC<KanbanCardProps> = ({id, tags, name, description, users, pr
               style={buttonStyles}
           />
         </div>
-        {/*<Button*/}
-        {/*    textColor="rgba(157, 155, 161, 1)"*/}
-        {/*    bgColor="rgba(233, 232, 236, 1)"*/}
-        {/*    style={{...buttonStyles, width: '100%'}}>*/}
-        {/*  More*/}
-        {/*</Button>*/}
         {/*<Modal visible={isOpen} setVisible={setIsOpen}>*/}
         {/*  <h1>Title: {name}</h1>*/}
         {/*</Modal>*/}

@@ -39,7 +39,7 @@ const taskSlice = createSlice({
   }
 })
 
-export const getTasks = createAction('task/getTasks')
+export const getTasks = createAction<number>('task/getTasks')
 export const getTasksSuccess = createAction<GetTasksSuccessPayload>('task/getTasksSuccess')
 export const updateTaskColumn = createAction<{taskId: number, columnId: number}>('task/updateTaskColumn')
 export const updateTaskColumnSuccess = createAction<ITask>('task/updateTaskColumnSuccess')

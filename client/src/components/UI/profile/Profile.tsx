@@ -15,7 +15,7 @@ const Profile: FC<ProfileProps> = ({name, src}) => {
     return (
         <Link to={'/profile'} className={classes.profile}>
             <div className={classes.profileInfo}>
-                <img src={src} className={classes.pfp} />
+                <img src={`${import.meta.env.VITE_BACKEND_URL ?? ''}` + src} className={classes.pfp} />
                 <span className={classes.name}>{name}</span>
             </div>
           <BiSolidExit onClick={() => dispatch(logout())} style={{color: 'black', fontSize: '1.4rem'}}/>

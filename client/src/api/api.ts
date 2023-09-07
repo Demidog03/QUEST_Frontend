@@ -8,7 +8,7 @@ import {DateTime} from 'luxon'
 import {toast} from 'react-toastify'
 
 export const api = axios.create({
-  baseURL: `/api/v1`,
+  baseURL: `${import.meta.env.VITE_BACKEND_URL ?? ''}/api/v1`,
   headers: {
     'Content-Type': 'application/json',
     Accept: 'application/json'
@@ -16,7 +16,7 @@ export const api = axios.create({
 })
 
 export const apiWithAuthAndErrorMessaging = axios.create({
-  baseURL: `/api/v1`,
+  baseURL: `${import.meta.env.VITE_BACKEND_URL ?? ''}/api/v1`,
   headers: {
     'Content-Type': 'application/json',
     Accept: 'application/json',

@@ -3,9 +3,14 @@ import {apiWithAuthAndErrorMessaging} from './api.ts'
 import {AddTaskPayload, GetTasksResponse} from '../store/types/task.ts'
 import {ITask} from '../models/ITask.ts'
 
-export const getTasks = async (): Promise<AxiosResponse<GetTasksResponse>> => {
+export const getTasks = async (projectId: number): Promise<AxiosResponse<GetTasksResponse>> => {
   return await apiWithAuthAndErrorMessaging.get(
       '/tasks/task/',
+      {
+        params: {
+          project: projectId
+        }
+      }
   )
 }
 

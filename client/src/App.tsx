@@ -32,7 +32,6 @@ export default function App() {
   useEffect(() => {
     if (user) {
       dispatch(getProjects())
-      dispatch(getTasks())
       dispatch(getNotes())
     }
   }, [user])

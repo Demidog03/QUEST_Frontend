@@ -11,7 +11,7 @@ const Profile = () => {
 
     return(
         <div className={classes.container}>
-            <img src={user?.user.profile_image} className={classes['profile-picture']} />
+            <img src={`${import.meta.env.VITE_BACKEND_URL ?? ''}` + user?.user.profile_image} className={classes['profile-picture']} />
             <span className={classes.name}>{user?.user.username}</span>
             <span className={classes.position}>{user?.position.code}</span>
             <div className={classes.progress}>

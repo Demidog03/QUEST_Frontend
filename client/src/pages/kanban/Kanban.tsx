@@ -1,7 +1,7 @@
 import {FC, useEffect} from 'react'
 import cl from './Kanban.module.scss'
 import {useDispatch, useSelector} from 'react-redux'
-import {TasksSelector, updateTaskColumn} from '../../store/features/task/taskSlice.ts'
+import {getTasks, TasksSelector, updateTaskColumn} from '../../store/features/task/taskSlice.ts'
 import {KanbanColumn} from 'components/kanban/KanbanColumn.tsx'
 import {closestCenter, DndContext, DragEndEvent, useDroppable} from '@dnd-kit/core'
 import {getProjectColumns, projectColumnsSelector} from '../../store/features/project/projectSlice.ts'
@@ -23,7 +23,9 @@ const Kanban: FC = () => {
 
   useEffect(() => {
     dispatch(getProjectColumns(params.id as string))
-  }, [])
+    dispatch(getTasks(+params.id))
+  }, [params.id])
+
 
   useEffect(() => {
     console.log(tasks)
