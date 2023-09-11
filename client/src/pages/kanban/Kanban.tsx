@@ -4,8 +4,9 @@ import {useDispatch, useSelector} from 'react-redux'
 import {getTasks, TasksSelector, updateTaskColumn} from '../../store/features/task/taskSlice.ts'
 import {KanbanColumn} from 'components/kanban/KanbanColumn.tsx'
 import {closestCenter, DndContext, DragEndEvent, useDroppable} from '@dnd-kit/core'
-import {getProjectColumns, projectColumnsSelector} from '../../store/features/project/projectSlice.ts'
+import {getProjectColumns, projectColumnsSelector, projectsSelector} from '../../store/features/project/projectSlice.ts'
 import {useParams} from 'react-router-dom'
+import Breadcrumbs from '../../components/breadcrumbs/Breadcrumbs'
 
 
 const Kanban: FC = () => {
@@ -13,6 +14,7 @@ const Kanban: FC = () => {
   const params = useParams()
   const tasks = useSelector(TasksSelector)
   const columns = useSelector(projectColumnsSelector)
+  const projects = useSelector(projectsSelector)
   const {setNodeRef} = useDroppable({
     id: 'kanban',
     data: {
@@ -40,6 +42,7 @@ const Kanban: FC = () => {
 
   return (
       <div className={cl.kanban} ref={setNodeRef}>
+        <Breadcrumbs title={projects.find(project => project.id === +params.id).name}/>
         <div className={cl.header}>
           <DndContext collisionDetection={closestCenter} onDragEnd={handleDragEnd} >
             {columns.map(column => (

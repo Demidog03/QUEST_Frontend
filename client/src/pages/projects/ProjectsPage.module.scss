@@ -6,7 +6,7 @@
 
 .projectsGrid{
   display: grid;
-  grid-template-columns: repeat(auto-fill, 248px);
+  grid-template-columns: repeat(auto-fit, minmax(248px, 1fr));
   gap: 22px;
   justify-content: space-between;
 }
