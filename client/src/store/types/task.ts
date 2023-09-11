@@ -8,6 +8,7 @@ export enum TaskActionTypes {
 export interface TasksState {
   tasks: ITask[]
   pending: boolean
+  task: ITask | null
 }
 
 export interface GetTasksResponse{
@@ -40,4 +41,13 @@ export interface AddTaskPayload {
   deadline: string
   column: string
   project: number
+}
+
+export interface UpdateTaskPayload {
+  taskId: number
+  name: string
+  description: string
+  priority: string
+  tags: string
+  users: number
 }

@@ -6,14 +6,14 @@ import Sidebar from "./components/sidebar/Sidebar";
 
 import Notes from "components/notes/Notes.jsx";
 import {
-  authUserSelector,
+  authUserSelector, getLevel,
   loginToken
 } from './store/features/auth/authSlice.ts'
 import {useDispatch, useSelector} from 'react-redux'
 import { router } from './routes'
 import { ToastContainer } from 'react-toastify'
 import { getProjects } from './store/features/project/projectSlice.ts'
-import {getNotes} from './store/features/notes/notesSlice.ts'
+import { getNotes } from './store/features/notes/notesSlice.ts'
 
 
 export default function App() {
@@ -29,9 +29,11 @@ export default function App() {
   }, [])
 
   useEffect(() => {
+    const accessToken = localStorage.getItem('accessToken')
     if (user) {
       dispatch(getProjects())
       dispatch(getNotes())
+      dispatch(getLevel({token: accessToken}))
     }
   }, [user])
 

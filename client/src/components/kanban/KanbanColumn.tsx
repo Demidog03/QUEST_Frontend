@@ -36,7 +36,6 @@ interface KanbanRowProps {
 export const KanbanColumn: FC<KanbanRowProps> = ({id, headerColor, headerText, tasks}) => {
   const dispatch = useDispatch()
   const params = useParams()
-  const tasksPending = useSelector(tasksPendingSelector)
   const [isOpen, setIsOpen] = useState<boolean>(false)
   const tasksId = useMemo(() => tasks?.map(task => task.id), [tasks])
   const {register, handleSubmit, control} = useForm()
@@ -86,10 +85,6 @@ export const KanbanColumn: FC<KanbanRowProps> = ({id, headerColor, headerText, t
     setIsOpen(false)
   }
 
-  const spinnerStyles = {
-    margin: '20px auto'
-  }
-
   return (
       <div>
         <div className={cl.headerItem}>
@@ -103,21 +98,9 @@ export const KanbanColumn: FC<KanbanRowProps> = ({id, headerColor, headerText, t
         </div>
 
           <div className={cl.tasks} ref={setNodeRef} style={{background: isOver ? 'rgba(0, 0, 0, 0.05)' : 'transparent'}}>
-            {tasksPending
-                ?
-                <MoonLoader
-                    color={'#FD71AF'}
-                    loading={tasksPending}
-                    size={30}
-                    cssOverride={spinnerStyles}
-                    aria-label="Loading tasks"
-                    data-testid="tasks"
-                />
-                :
                 <SortableContext items={tasksId as number[]} id={id as string} >
                   {tasks.length !== 0 ? tasks.map(task => <KanbanCard key={task.id} id={task.id} tags={task.task_tags} name={task.name} description={task.description} users={task.assigned_users} columnId={task.column} priority={task.priority}/>) : <p className={cl.noTasksText}>No tasks</p>}
                 </SortableContext>
-            }
           </div>
 
         <Modal setVisible={setIsOpen} visible={isOpen} >
