@@ -30,6 +30,7 @@ import {DateField, LocalizationProvider} from '@mui/x-date-pickers'
 import {AdapterLuxon} from '@mui/x-date-pickers/AdapterLuxon'
 import {getTags} from '../../api/tag.ts'
 import {getUsers} from '../../api/users.ts'
+import {projectsPendingSelector} from '../../store/features/project/projectSlice.ts'
 
 interface KanbanCardProps {
   id: number
@@ -45,7 +46,9 @@ const KanbanCard: FC<KanbanCardProps> = ({id, tags, name, description, users, pr
   const dispatch = useDispatch()
   const [isEditOpen, setIsEditOpen] = useState<boolean>(false)
   const [isOnHover, setIsOnHover] = useState<boolean>(false)
+  const [dataPending, setDataPending] = useState<boolean>(false)
   const tasksPending = useSelector(tasksPendingSelector)
+  const projectsPending = useSelector(projectsPendingSelector)
   const selectedTask = useSelector(taskSelector)
   const [allTags, setAllTags] = useState<ITag2[]>([])
   const [allUsers, setAllUsers] = useState<{ id: number, username: string }[]>([])
@@ -73,11 +76,13 @@ const KanbanCard: FC<KanbanCardProps> = ({id, tags, name, description, users, pr
   }
   useEffect(() => {
     void(async () => {
+      setDataPending(true)
       const response = await getTags()
       setAllTags(response.data.results)
       const response2 = await getUsers()
       // @ts-ignore
       setAllUsers(response2.data)
+      setDataPending(false)
     })()
   }, [])
   const handleChange = (event: SelectChangeEvent<typeof selectedTagsId>) => {
@@ -118,10 +123,10 @@ const KanbanCard: FC<KanbanCardProps> = ({id, tags, name, description, users, pr
     setIsEditOpen(false)
   }
 
-  if(tasksPending) {
+  if(tasksPending || projectsPending || dataPending) {
     return <MoonLoader
         color={'#FD71AF'}
-        loading={tasksPending}
+        loading={tasksPending || projectsPending || dataPending}
         size={30}
         cssOverride={spinnerStyles}
         aria-label="Loading tasks"

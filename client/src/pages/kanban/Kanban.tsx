@@ -42,7 +42,7 @@ const Kanban: FC = () => {
 
   return (
       <div className={cl.kanban} ref={setNodeRef}>
-        <Breadcrumbs title={projects.find(project => project.id === +params.id).name}/>
+        <Breadcrumbs title={projects.find(project => project.id === +params.id)?.name}/>
         <div className={cl.header}>
           <DndContext collisionDetection={closestCenter} onDragEnd={handleDragEnd} >
             {columns.map(column => (
