@@ -5,7 +5,7 @@ function NotFound404() {
     return (
         <div className={cl.notFound}>
             <h1>Ошибка 404. Страница не найдена</h1>
-            <Link to={"/projects"}><button className={cl.goMainBtn}>На главную</button></Link>
+            <Link to={"/class"}><button className={cl.goMainBtn}>На главную</button></Link>
         </div>
     );
 }

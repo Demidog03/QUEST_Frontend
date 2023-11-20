@@ -18,7 +18,7 @@ const KanbanPage = Loadable(lazy(async() => await import('./pages/kanban/Kanban'
 
 export const router: RouteObject[] = [
   {
-    path: 'projects',
+    path: 'class',
     element: (
       <AuthPageGuard>
         <ProjectsPage/>

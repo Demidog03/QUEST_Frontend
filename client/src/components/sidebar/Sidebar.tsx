@@ -40,8 +40,8 @@ const Sidebar: FC = () => {
     { name: 'Overview', icon: overviewIcon, path: '/' },
     { name: 'Calendar', icon: calendarIcon, path: '/' },
     { name: 'Analytics', icon: analyticsIcon, path: '/' },
-    { name: 'Projects', icon: projectsIcon, path: '/projects' },
-    { name: 'Teams', icon: teamsIcon, path: '/teams' },
+    { name: 'Class', icon: projectsIcon, path: '/class' },
+    { name: 'Classes', icon: teamsIcon, path: '/classes' },
   ];
   const user = useSelector(authUserSelector)
   // const exampleProjects = ['Salam', 'Some Services', 'dsak dkas', 'Project', 'Project',];
