@@ -20,7 +20,7 @@ const LoginForm: FC = () => {
 
     useEffect(() => {
         if(user) {
-            navigate("/projects")
+            navigate("/class")
         }
     }, [navigate, user])
 

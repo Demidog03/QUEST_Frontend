@@ -6,8 +6,8 @@ import cl from "./PageHeader.module.scss"
 export const PageHeader: FC = () => {
   const {pathname} = useLocation()
 
-  if(pathname==="/projects"){
-    return <div className={cl.projects}><BsClockHistory/><h2>Latest Projects</h2></div>
+  if(pathname==="/class"){
+    return <div className={cl.projects}><BsClockHistory/><h2>Latest Classes</h2></div>
   }
 
   return (
